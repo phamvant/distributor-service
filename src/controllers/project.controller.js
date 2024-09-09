@@ -24,11 +24,11 @@ const create = catchAsync(async (req, res) => {
     fs.mkdirSync(uploadFolder, { recursive: true });
   }
 
-  fs.rename(markdownFile[0].path, path.join(uploadFolder, `README.md`), (err) => {
-    if (err) {
-      throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, 'Failed to save input file');
-    }
-  });
+  // fs.rename(markdownFile[0].path, path.join(uploadFolder, `README.md`), (err) => {
+  //   if (err) {
+  //     throw new ApiError(httpStatus.SERVICE_UNAVAILABLE, 'Failed to save input file');
+  //   }
+  // });
 
   fs.rename(inputFile[0].path, path.join(uploadFolder, `input.txt`), (err) => {
     if (err) {
@@ -62,7 +62,7 @@ const create = catchAsync(async (req, res) => {
     },
   };
 
-  await uploadToS3(bucketId, uploadFolder);
+  // await uploadToS3(bucketId, uploadFolder);
   const response = await GRPCServer.createProject(bucketId);
   logger.info(`Project ${name} is serving at ${response.host}:${response.port}`);
 
